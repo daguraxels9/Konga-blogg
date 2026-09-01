@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elvar Freyr — Vikublogg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1B1B1E;
+    --paper: #EFEDE6;
+    --paper-shade: #E2DFD3;
+    --line: #D2CFC1;
+    --song: #B8763A;
+    --woman: #A14B5C;
+    --text: #3F5D6B;
+    --photo: #5C6B3F;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  header .wrap { display:flex; align-items:center; justify-content:space-between; height: 72px; }
+  .logo { font-family:'Newsreader', serif; font-style:italic; font-size:21px; }
+  nav ul { display:flex; gap:26px; list-style:none; }
+  nav a { text-decoration:none; font-size:14.5px; }
+  nav button.filter-link {
+    background:none; border:none; font: inherit; font-size:14.5px; color: var(--ink);
+    cursor:pointer; padding:0; border-bottom: 2px solid transparent;
+  }
+  nav button.filter-link.active { border-bottom-color: currentColor; }
+
+  .hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+  .hero-tag {
+    display:inline-block; font-size:13px; color: var(--song);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family:'Newsreader', serif; font-weight:500;
+    font-size: clamp(34px, 5.4vw, 54px);
+    line-height: 1.08; max-width: 16ch; letter-spacing:-0.01em;
+  }
+  .hero p.dek {
+    margin-top: 18px; max-width: 52ch; font-size: 17.5px; color:#4A4A44;
+  }
+  .hero-meta { margin-top: 22px; font-size: 13.5px; color:#7A776C; }
+
+  .filters { padding: 28px 0 0; }
+  .filters .wrap { display:flex; gap:22px; flex-wrap:wrap; }
+
+  .archive { padding: 36px 0 80px; }
+  .post-list { display:flex; flex-direction:column; }
+  .post {
+    display:grid;
+    grid-template-columns: 90px 140px 1fr;
+    gap: 28px;
+    align-items: start;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .post .week { font-size:13px; color:#8A8779; padding-top:4px; }
+  .post .swatch {
+    width: 100%; aspect-ratio: 4/3; border-radius: 2px;
+    display:flex; align-items:flex-end; justify-content:flex-start;
+    padding: 8px 10px; font-size:11px; color: var(--paper);
+  }
+  .post h3 { font-family:'Newsreader', serif; font-weight:500; font-size:20px; margin-bottom:6px; }
+  .post p { font-size:15px; color:#4A4A44; max-width:56ch; }
+  .post .cat {
+    display:inline-block; font-size:12.5px; margin-bottom:8px;
+  }
+
+  .post[data-cat="lag"] .swatch { background: var(--song); }
+  .post[data-cat="kona"] .swatch { background: var(--woman); }
+  .post[data-cat="texti"] .swatch { background: var(--text); }
+  .post[data-cat="ljosmynd"] .swatch { background: var(--photo); }
+  .post[data-cat="lag"] .cat { color: var(--song); }
+  .post[data-cat="kona"] .cat { color: var(--woman); }
+  .post[data-cat="texti"] .cat { color: var(--text); }
+  .post[data-cat="ljosmynd"] .cat { color: var(--photo); }
+
+  .post.hidden { display:none; }
+
+  .about {
+    background: var(--paper-shade);
+    padding: 60px 0;
+  }
+  .about .wrap { display:grid; grid-template-columns: 200px 1fr; gap:40px; }
+  .about h2 { font-family:'Newsreader', serif; font-style:italic; font-size:22px; }
+  .about p { max-width: 58ch; color:#3B3B36; }
+
+  footer {
+    padding: 28px 0; font-size:13px; color:#8A8779;
+    display:flex; justify-content:space-between;
+  }
+
+  @media (max-width: 680px) {
+    .post { grid-template-columns: 100px 1fr; }
+    .post .week { grid-column: 1 / -1; padding-top:0; }
+    nav ul { display:none; }
+    .about .wrap { grid-template-columns: 1fr; gap:14px; }
+    .filters .wrap { gap:14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Elvar Freyr</div>
+    <nav aria-label="Aðalvalmynd">
+      <ul>
+        <li><a href="#um">Um bloggið</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-tag">Ljósmynd vikunnar · Vika 35</span>
+    <h1>Fjórar færslur í viku hverri, ein hugsun í senn.</h1>
+    <p class="dek">Vikulegt blogg þar sem hvert atriði fær sinn eigin sess: eitt lag, ein kona sem er í uppáhaldi, einn texti sem situr eftir og ein ljósmynd sem fangar augnablik.</p>
+    <div class="hero-meta">Nýjasta færsla · Uppfært vikulega</div>
+  </div>
+</section>
+
+<section class="filters">
+  <div class="wrap" role="tablist" aria-label="Sía eftir flokki">
+    <button class="filter-link active" data-filter="all">Allt</button>
+    <button class="filter-link" data-filter="lag" style="color:var(--song)">Lag vikunnar</button>
+    <button class="filter-link" data-filter="kona" style="color:var(--woman)">Kona vikunnar</button>
+    <button class="filter-link" data-filter="texti" style="color:var(--text)">Texti vikunnar</button>
+    <button class="filter-link" data-filter="ljosmynd" style="color:var(--photo)">Ljósmynd vikunnar</button>
+  </div>
+</section>
+
+<section class="archive">
+  <div class="wrap">
+    <div class="post-list" id="postList">
+
+      <article class="post" data-cat="ljosmynd">
+        <div class="week">Vika 35</div>
+        <div class="swatch">Ljósmynd</div>
+        <div>
+          <span class="cat">Ljósmynd vikunnar</span>
+          <h3>Morgunþoka yfir firðinum</h3>
+          <p>Ein mynd, tekin án fyrirhugunar, sem náði að fanga birtuna betur en flest annað þessa vikuna. Dæmi um færslu — settu inn eigin ljósmynd og stutta hugleiðingu.</p>
+        </div>
+      </article>
+
+      <article class="post" data-cat="lag">
+        <div class="week">Vika 35</div>
+        <div class="swatch">Lag</div>
+        <div>
+          <span class="cat">Lag vikunnar</span>
+          <h3>Lagið sem fylgdi vikunni</h3>
+          <p>Stutt umfjöllun um af hverju þetta lag sat í spilun þessa vikuna. Dæmi um færslu — bættu við titli, flytjanda og eigin orðum.</p>
+        </div>
+      </article>
+
+      <article class="post" data-cat="kona">
+        <div class="week">Vika 34</div>
+        <div class="swatch">Kona</div>
+        <div>
+          <span class="cat">Kona vikunnar</span>
+          <h3>Manneskja sem vakti eftirtekt</h3>
+          <p>Stutt kynning á konu sem hefur haft áhrif — í listum, samfélagi eða persónulegu lífi. Dæmi um færslu, tilbúið fyrir þitt eigið efni.</p>
+        </div>
+      </article>
+
+      <article class="post" data-cat="texti">
+        <div class="week">Vika 34</div>
+        <div class="swatch">Texti</div>
+        <div>
+          <span class="cat">Texti vikunnar</span>
+          <h3>Setning sem sat eftir</h3>
+          <p>Hugleiðing um texta, tilvitnun eða brot sem greip athyglina þessa vikuna. Dæmi um færslu — skiptu út fyrir eigin lestur.</p>
+        </div>
+      </article>
+
+      <article class="post" data-cat="lag">
+        <div class="week">Vika 34</div>
+        <div class="swatch">Lag</div>
+        <div>
+          <span class="cat">Lag vikunnar</span>
+          <h3>Annað dæmi um lag vikunnar</h3>
+          <p>Hér má lýsa stemningunni í laginu, hvenær það var uppgötvað og af hverju það á erindi í þessa viku.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="um">
+  <div class="wrap">
+    <h2>Um bloggið</h2>
+    <p>Þetta er persónulegt vikublogg þar sem fjórir fastir liðir eru settir fram í hverri viku: lag, kona, texti og ljósmynd sem hafa fangað athyglina. Hugmyndin er að halda hverri færslu stuttri og einbeita sér að einu í senn.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Elvar Freyr</span>
+    <span>elvarfreyr.com</span>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-link');
+  const posts = document.querySelectorAll('.post');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      posts.forEach(p => {
+        p.classList.toggle('hidden', filter !== 'all' && p.dataset.cat !== filter);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
