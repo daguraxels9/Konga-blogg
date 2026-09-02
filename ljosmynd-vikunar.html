@@ -35,7 +35,7 @@
           </div>
         </header>
 
-        <div class="feature-illustration" data-image-name="mynd-vikunar" style="background: linear-gradient(135deg, #dfe2c3, #788a5a);">Ljósmynd vikunnar</div>
+        <img class="page-image" src="Images/mynd-vikunar.PNG" alt="Ljósmynd vikunnar" />
 
         <p>Þessi mynd er ekki bara mynd af stað. Hún er heil skrefið í því að finna hljóðið í morgninum. Eitthvað í henni fær mann til að vera kyrran og taka inn tækifærið sem var fyrir augunum.</p>
 
@@ -50,38 +50,5 @@
     <footer class="page-footer">
       <div class="container">© 2026 Elvar Freyr</div>
     </footer>
-
-    <script>
-      const supportedExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
-
-      function loadImageByName(element, baseName) {
-        const folder = 'Images/';
-        const candidates = supportedExtensions.map((ext) => `${folder}${baseName}.${ext}`);
-        let index = 0;
-
-        function tryNext() {
-          if (index >= candidates.length) return;
-
-          const img = new Image();
-          img.onload = () => {
-            element.style.backgroundImage = `url("${candidates[index]}")`;
-            element.style.backgroundSize = 'cover';
-            element.style.backgroundPosition = 'center';
-            element.textContent = '';
-          };
-          img.onerror = () => {
-            index += 1;
-            tryNext();
-          };
-          img.src = candidates[index];
-        }
-
-        tryNext();
-      }
-
-      document.querySelectorAll('[data-image-name]').forEach((element) => {
-        loadImageByName(element, element.dataset.imageName);
-      });
-    </script>
   </body>
 </html>

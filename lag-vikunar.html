@@ -35,7 +35,7 @@
           </div>
         </header>
 
-        <div class="feature-illustration" data-image-name="lag-vikunar" style="background: linear-gradient(135deg, #f4d8bc, #c78045);">Lag vikunnar</div>
+        <img class="page-image" src="Images/lag-vikunar.JPG" alt="Lag vikunnar" />
 
         <p>Þetta er það lag sem fór með mig á flakk í gegnum vikuna. Það er ekki stórkostlegt að flestu leyti, heldur er það það sem gerir það svo gott: hreint, einfalt og fullkomlega staðsett á milli eftirvæntingar og ró.</p>
 
@@ -50,38 +50,5 @@
     <footer class="page-footer">
       <div class="container">© 2026 Elvar Freyr</div>
     </footer>
-
-    <script>
-      const supportedExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
-
-      function loadImageByName(element, baseName) {
-        const folder = 'Images/';
-        const candidates = supportedExtensions.map((ext) => `${folder}${baseName}.${ext}`);
-        let index = 0;
-
-        function tryNext() {
-          if (index >= candidates.length) return;
-
-          const img = new Image();
-          img.onload = () => {
-            element.style.backgroundImage = `url("${candidates[index]}")`;
-            element.style.backgroundSize = 'cover';
-            element.style.backgroundPosition = 'center';
-            element.textContent = '';
-          };
-          img.onerror = () => {
-            index += 1;
-            tryNext();
-          };
-          img.src = candidates[index];
-        }
-
-        tryNext();
-      }
-
-      document.querySelectorAll('[data-image-name]').forEach((element) => {
-        loadImageByName(element, element.dataset.imageName);
-      });
-    </script>
   </body>
 </html>

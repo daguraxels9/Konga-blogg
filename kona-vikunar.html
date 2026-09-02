@@ -35,9 +35,7 @@
           </div>
         </header>
 
-        <div class="story-visual story-visual-woman" data-image-name="kona-vikunar" aria-label="Mynd fyrir konuna vikunnar">
-          <span>Kona vikunnar</span>
-        </div>
+        <img class="page-image" src="Images/kona-vikunar.WEBP" alt="Kona vikunnar" />
 
         <div class="single-text-block">
           <p>Þessi vika er tileinkuð þeirri stúlku sem gerir mann varfærinn um hversu miklu máli skiptir að hafa sinn eigin takt í lífinu. Hún er ekki hávær, en hún skapar stað.</p>
@@ -48,38 +46,5 @@
     <footer class="page-footer">
       <div class="container">© 2026 Elvar Freyr</div>
     </footer>
-
-    <script>
-      const supportedExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
-
-      function loadImageByName(element, baseName) {
-        const folder = 'Images/';
-        const candidates = supportedExtensions.map((ext) => `${folder}${baseName}.${ext}`);
-        let index = 0;
-
-        function tryNext() {
-          if (index >= candidates.length) return;
-
-          const img = new Image();
-          img.onload = () => {
-            element.style.backgroundImage = `url("${candidates[index]}")`;
-            element.style.backgroundSize = 'cover';
-            element.style.backgroundPosition = 'center';
-            element.textContent = '';
-          };
-          img.onerror = () => {
-            index += 1;
-            tryNext();
-          };
-          img.src = candidates[index];
-        }
-
-        tryNext();
-      }
-
-      document.querySelectorAll('[data-image-name]').forEach((element) => {
-        loadImageByName(element, element.dataset.imageName);
-      });
-    </script>
   </body>
 </html>
