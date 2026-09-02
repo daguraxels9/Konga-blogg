@@ -4,23 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Texti vikunnar — Elvar Freyr</title>
-    <link rel="icon" type="image/jpeg" href="Images/profile.jpg" />
-    <link rel="apple-touch-icon" href="Images/profile.jpg" />
+    <link rel="icon" type="image/jpeg" href="../Images/profile.jpg" />
+    <link rel="apple-touch-icon" href="../Images/profile.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <a class="brand" href="index.html">Elvar Freyr</a>
+        <a class="brand" href="../home/">Elvar Freyr</a>
         <nav class="site-nav" aria-label="Aðalvalmynd">
-          <a href="index.html">Heim</a>
-          <a href="ljosmynd-vikunar.html">Ljósmynd vikunnar</a>
-          <a href="lag-vikunar.html">Lag vikunnar</a>
-          <a href="kona-vikunar.html">Kona vikunnar</a>
-          <a href="texti-vikunar.html">Texti vikunnar</a>
+          <a href="../home/">Heim</a>
+          <a href="../ljosmynd-vikunar/">Ljósmynd vikunnar</a>
+          <a href="../lag-vikunar/">Lag vikunnar</a>
+          <a href="../kona-vikunar/">Kona vikunnar</a>
+          <a href="../texti-vikunar/">Texti vikunnar</a>
         </nav>
       </div>
     </header>
@@ -48,7 +48,7 @@
     </footer>
 
     <script>
-      const textFile = 'Textar/texti-vikunar.txt';
+      const textFile = '../Textar/texti-vikunar.txt';
 
       fetch(textFile)
         .then((response) => {

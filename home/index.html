@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elvar Freyr — Vikublogg</title>
+    <link rel="icon" type="image/jpeg" href="../Images/profile.jpg" />
+    <link rel="apple-touch-icon" href="../Images/profile.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../home/">Elvar Freyr</a>
+        <nav class="site-nav" aria-label="Aðalvalmynd">
+          <a href="../home/">Heim</a>
+          <a href="../ljosmynd-vikunar/">Ljósmynd vikunnar</a>
+          <a href="../lag-vikunar/">Lag vikunnar</a>
+          <a href="../kona-vikunar/">Kona vikunnar</a>
+          <a href="../texti-vikunar/">Texti vikunnar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <div class="container">
+          <div id="homepage-content"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">© 2026 Elvar Freyr</div>
+    </footer>
+
+    <script>
+      fetch('../Textar/homepage.txt')
+        .then((response) => {
+          if (!response.ok) throw new Error('Text file not found');
+          return response.text();
+        })
+        .then((text) => {
+          const container = document.getElementById('homepage-content');
+          if (!container) return;
+
+          const paragraphs = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean);
+
+          container.innerHTML = paragraphs
+            .map((paragraph, index) => index === 0
+              ? `<h1>${paragraph.replace(/\n/g, ' ')}</h1>`
+              : `<p class="lead">${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        })
+        .catch(() => {
+          const container = document.getElementById('homepage-content');
+          if (container) container.innerHTML = '<p class="lead">Textinn er ekki tiltækur.</p>';
+        });
+    </script>
+  </body>
+</html>
