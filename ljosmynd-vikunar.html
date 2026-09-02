@@ -23,9 +23,9 @@
       </div>
     </header>
 
-    <main class="entry">
+    <main class="entry single-entry">
       <div class="container">
-        <header class="entry-header">
+        <header class="entry-header compact-header">
           <span class="eyebrow" style="color: var(--photo);">Ljósmynd vikunnar</span>
           <h1>Morgunþoka yfir firðinum</h1>
           <div class="details">
@@ -37,18 +37,39 @@
 
         <img class="page-image" src="Images/mynd-vikunar.PNG" alt="Ljósmynd vikunnar" />
 
-        <p>Þessi mynd er ekki bara mynd af stað. Hún er heil skrefið í því að finna hljóðið í morgninum. Eitthvað í henni fær mann til að vera kyrran og taka inn tækifærið sem var fyrir augunum.</p>
-
-        <p>Þetta er eintakið af augnabliki sem gerist án þess að biðja um athygli. Það birtist á réttum tíma, í réttum umhverfi og tekur sig upp að læra okkur að hægja á okkur.</p>
-
-        <blockquote class="quote" style="border-left-color: var(--photo); background: rgba(92, 107, 63, 0.05);">“Sannleikurinn er oft þögull, en hann er alltaf þar.”</blockquote>
-
-        <p>Þegar myndin er vel valin getur hún talað fyrir margar setningar. Þetta er ein af þeim sem halda áfram að koma aftur.</p>
+        <div class="single-text-block" id="text-content"></div>
       </div>
     </main>
 
     <footer class="page-footer">
       <div class="container">© 2026 Elvar Freyr</div>
     </footer>
+
+    <script>
+      fetch('Textar/ljosmynd-vikunar.txt')
+        .then((response) => {
+          if (!response.ok) throw new Error('Text file not found');
+          return response.text();
+        })
+        .then((text) => {
+          const container = document.getElementById('text-content');
+          if (!container) return;
+
+          const paragraphs = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean);
+
+          container.innerHTML = paragraphs
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        })
+        .catch(() => {
+          const container = document.getElementById('text-content');
+          if (container) {
+            container.innerHTML = '<p>Textinn er ekki tiltækur.</p>';
+          }
+        });
+    </script>
   </body>
 </html>

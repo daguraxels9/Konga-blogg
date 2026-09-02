@@ -23,9 +23,9 @@
       </div>
     </header>
 
-    <main class="entry">
+    <main class="entry single-entry">
       <div class="container">
-        <header class="entry-header">
+        <header class="entry-header compact-header">
           <span class="eyebrow">Lag vikunnar</span>
           <h1>Þetta lag hélst í mér allan daginn</h1>
           <div class="details">
@@ -37,18 +37,39 @@
 
         <img class="page-image" src="Images/lag-vikunar.JPG" alt="Lag vikunnar" />
 
-        <p>Þetta er það lag sem fór með mig á flakk í gegnum vikuna. Það er ekki stórkostlegt að flestu leyti, heldur er það það sem gerir það svo gott: hreint, einfalt og fullkomlega staðsett á milli eftirvæntingar og ró.</p>
-
-        <p>Á meðan ég hlustaði á lagið endurómmaðist sama setningin aftur og aftur: eitthvað um að halda áfram þrátt fyrir allt. Það er ástæðan fyrir því að þetta lag passar vel inn í þessa viku — ekki vegna stórra hreyfinga, heldur vegna lítilla, varanlegra skrefa.</p>
-
-        <blockquote class="quote">“Þú þekkir ekki endann fyrr en þú sérð hvort stjórnin er enn í höndunum.”</blockquote>
-
-        <p>Ef þú vilt hafa meira af laginu skaltu setja það á spilun, loka augunum og leyfa því að fylla rýmið um þig. Það er ekki nauðsynlegt að skilja allt; nóg er að hlusta.</p>
+        <div class="single-text-block" id="text-content"></div>
       </div>
     </main>
 
     <footer class="page-footer">
       <div class="container">© 2026 Elvar Freyr</div>
     </footer>
+
+    <script>
+      fetch('Textar/lag-vikunar.txt')
+        .then((response) => {
+          if (!response.ok) throw new Error('Text file not found');
+          return response.text();
+        })
+        .then((text) => {
+          const container = document.getElementById('text-content');
+          if (!container) return;
+
+          const paragraphs = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean);
+
+          container.innerHTML = paragraphs
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        })
+        .catch(() => {
+          const container = document.getElementById('text-content');
+          if (container) {
+            container.innerHTML = '<p>Textinn er ekki tiltækur.</p>';
+          }
+        });
+    </script>
   </body>
 </html>

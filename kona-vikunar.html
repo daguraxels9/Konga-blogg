@@ -27,7 +27,7 @@
       <div class="container">
         <header class="entry-header compact-header">
           <span class="eyebrow" style="color: var(--woman);">Kona vikunnar</span>
-          <h1>Hún bjó yfir þeirri ró sem margir leita að</h1>
+          <h1>Gella vikunar</h1>
           <div class="details">
             <span>Vika 1</span>
             <span>Persóna</span>
@@ -37,14 +37,39 @@
 
         <img class="page-image" src="Images/kona-vikunar.WEBP" alt="Kona vikunnar" />
 
-        <div class="single-text-block">
-          <p>Þessi vika er tileinkuð þeirri stúlku sem gerir mann varfærinn um hversu miklu máli skiptir að hafa sinn eigin takt í lífinu. Hún er ekki hávær, en hún skapar stað.</p>
-        </div>
+        <div class="single-text-block" id="text-content"></div>
       </div>
     </main>
 
     <footer class="page-footer">
       <div class="container">© 2026 Elvar Freyr</div>
     </footer>
+
+    <script>
+      fetch('Textar/kona-vikunar.txt')
+        .then((response) => {
+          if (!response.ok) throw new Error('Text file not found');
+          return response.text();
+        })
+        .then((text) => {
+          const container = document.getElementById('text-content');
+          if (!container) return;
+
+          const paragraphs = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean);
+
+          container.innerHTML = paragraphs
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        })
+        .catch(() => {
+          const container = document.getElementById('text-content');
+          if (container) {
+            container.innerHTML = '<p>Textinn er ekki tiltækur.</p>';
+          }
+        });
+    </script>
   </body>
 </html>
