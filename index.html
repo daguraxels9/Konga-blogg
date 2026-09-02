@@ -83,7 +83,13 @@
     width: 100%; aspect-ratio: 4/3; border-radius: 2px;
     display:flex; align-items:flex-end; justify-content:flex-start;
     padding: 8px 10px; font-size:11px; color: var(--paper);
+    overflow:hidden;
   }
+  .post .swatch img {
+    display:block; width:100%; height:100%; object-fit:cover;
+  }
+  .post[data-cat="ljosmynd"] .swatch img { object-position:center 58%; }
+  .post[data-cat="kona"] .swatch img { object-position:center 28%; }
   .post h3 { font-family:'Newsreader', serif; font-weight:500; font-size:20px; margin-bottom:6px; }
   .post p { font-size:15px; color:#4A4A44; max-width:56ch; }
   .post .cat {
@@ -139,7 +145,7 @@
 <section class="hero">
   <div class="wrap">
     <span class="hero-tag">Ljósmynd vikunnar · Vika 35</span>
-    <h1>Fjórar færslur í viku hverri, ein hugsun í senn.</h1>
+    <h1>Fjón hugsun í senn.</h1>
     <p class="dek">Vikulegt blogg þar sem hvert atriði fær sinn eigin sess: eitt lag, ein kona sem er í uppáhaldi, einn texti sem situr eftir og ein ljósmynd sem fangar augnablik.</p>
     <div class="hero-meta">Nýjasta færsla · Uppfært vikulega</div>
   </div>
@@ -161,7 +167,7 @@
 
       <article class="post" data-cat="ljosmynd">
         <div class="week">Vika 35</div>
-        <div class="swatch">Ljósmynd</div>
+        <div class="swatch"><img src="Images/Elli_Steinar_Snekkja.PNG" alt="Þrír menn við höfnina" loading="lazy"></div>
         <div>
           <span class="cat">Ljósmynd vikunnar</span>
           <h3>Morgunþoka yfir firðinum</h3>
@@ -181,7 +187,7 @@
 
       <article class="post" data-cat="kona">
         <div class="week">Vika 34</div>
-        <div class="swatch">Kona</div>
+        <div class="swatch"><img src="Images/Selma.WEBP" alt="Selma á rauðum dregli" loading="lazy"></div>
         <div>
           <span class="cat">Kona vikunnar</span>
           <h3>Manneskja sem vakti eftirtekt</h3>
