@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ljósmynd vikunnar — Elvar Freyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">Elvar Freyr</a>
+        <nav class="site-nav" aria-label="Aðalvalmynd">
+          <a href="index.html">Heim</a>
+          <a href="ljosmynd-vikunar.html">Ljósmynd vikunnar</a>
+          <a href="lag-vikunar.html">Lag vikunnar</a>
+          <a href="kona-vikunar.html">Kona vikunnar</a>
+          <a href="texti-vikunar.html">Texti vikunnar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="entry">
+      <div class="container">
+        <header class="entry-header">
+          <span class="eyebrow" style="color: var(--photo);">Ljósmynd vikunnar</span>
+          <h1>Morgunþoka yfir firðinum</h1>
+          <div class="details">
+            <span>Vika 1</span>
+            <span>Mynd</span>
+            <span>Dalvík</span>
+          </div>
+        </header>
+
+        <div class="feature-illustration" data-image-name="mynd-vikunar" style="background: linear-gradient(135deg, #dfe2c3, #788a5a);">Ljósmynd vikunnar</div>
+
+        <p>Þessi mynd er ekki bara mynd af stað. Hún er heil skrefið í því að finna hljóðið í morgninum. Eitthvað í henni fær mann til að vera kyrran og taka inn tækifærið sem var fyrir augunum.</p>
+
+        <p>Þetta er eintakið af augnabliki sem gerist án þess að biðja um athygli. Það birtist á réttum tíma, í réttum umhverfi og tekur sig upp að læra okkur að hægja á okkur.</p>
+
+        <blockquote class="quote" style="border-left-color: var(--photo); background: rgba(92, 107, 63, 0.05);">“Sannleikurinn er oft þögull, en hann er alltaf þar.”</blockquote>
+
+        <p>Þegar myndin er vel valin getur hún talað fyrir margar setningar. Þetta er ein af þeim sem halda áfram að koma aftur.</p>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">© 2026 Elvar Freyr</div>
+    </footer>
+
+    <script>
+      const supportedExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
+
+      function loadImageByName(element, baseName) {
+        const folder = 'Images/';
+        const candidates = supportedExtensions.map((ext) => `${folder}${baseName}.${ext}`);
+        let index = 0;
+
+        function tryNext() {
+          if (index >= candidates.length) return;
+
+          const img = new Image();
+          img.onload = () => {
+            element.style.backgroundImage = `url("${candidates[index]}")`;
+            element.style.backgroundSize = 'cover';
+            element.style.backgroundPosition = 'center';
+            element.textContent = '';
+          };
+          img.onerror = () => {
+            index += 1;
+            tryNext();
+          };
+          img.src = candidates[index];
+        }
+
+        tryNext();
+      }
+
+      document.querySelectorAll('[data-image-name]').forEach((element) => {
+        loadImageByName(element, element.dataset.imageName);
+      });
+    </script>
+  </body>
+</html>

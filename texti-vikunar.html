@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Texti vikunnar — Elvar Freyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">Elvar Freyr</a>
+        <nav class="site-nav" aria-label="Aðalvalmynd">
+          <a href="index.html">Heim</a>
+          <a href="ljosmynd-vikunar.html">Ljósmynd vikunnar</a>
+          <a href="lag-vikunar.html">Lag vikunnar</a>
+          <a href="kona-vikunar.html">Kona vikunnar</a>
+          <a href="texti-vikunar.html">Texti vikunnar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="entry">
+      <div class="container">
+        <header class="entry-header">
+          <span class="eyebrow" style="color: var(--text);">Texti vikunnar</span>
+          <h1>Það sem situr eftir er oft það sem var satt</h1>
+          <div class="details">
+            <span>Vika 1</span>
+            <span>Hugleiðing</span>
+            <span>Lestur</span>
+          </div>
+        </header>
+
+        <div class="feature-illustration" style="background: linear-gradient(135deg, #d7e1e7, #547d8d);">Texti vikunnar</div>
+
+        <div class="single-text-block" id="text-content"></div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">© 2026 Elvar Freyr</div>
+    </footer>
+
+    <script>
+      const textFile = 'Textar/texti-vikunar.txt';
+
+      fetch(textFile)
+        .then((response) => {
+          if (!response.ok) throw new Error('Text file not found');
+          return response.text();
+        })
+        .then((text) => {
+          const container = document.getElementById('text-content');
+          if (!container) return;
+
+          const paragraphs = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean);
+
+          container.innerHTML = paragraphs
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        })
+        .catch(() => {
+          const container = document.getElementById('text-content');
+          if (container) {
+            container.innerHTML = '<p>Textinn er ekki tiltækur.</p>';
+          }
+        });
+    </script>
+  </body>
+</html>

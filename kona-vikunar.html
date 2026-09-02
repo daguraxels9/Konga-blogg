@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kona vikunnar — Elvar Freyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">Elvar Freyr</a>
+        <nav class="site-nav" aria-label="Aðalvalmynd">
+          <a href="index.html">Heim</a>
+          <a href="ljosmynd-vikunar.html">Ljósmynd vikunnar</a>
+          <a href="lag-vikunar.html">Lag vikunnar</a>
+          <a href="kona-vikunar.html">Kona vikunnar</a>
+          <a href="texti-vikunar.html">Texti vikunnar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="entry single-entry">
+      <div class="container">
+        <header class="entry-header compact-header">
+          <span class="eyebrow" style="color: var(--woman);">Kona vikunnar</span>
+          <h1>Hún bjó yfir þeirri ró sem margir leita að</h1>
+          <div class="details">
+            <span>Vika 1</span>
+            <span>Persóna</span>
+            <span>Hugmynd</span>
+          </div>
+        </header>
+
+        <div class="story-visual story-visual-woman" data-image-name="kona-vikunar" aria-label="Mynd fyrir konuna vikunnar">
+          <span>Kona vikunnar</span>
+        </div>
+
+        <div class="single-text-block">
+          <p>Þessi vika er tileinkuð þeirri stúlku sem gerir mann varfærinn um hversu miklu máli skiptir að hafa sinn eigin takt í lífinu. Hún er ekki hávær, en hún skapar stað.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">© 2026 Elvar Freyr</div>
+    </footer>
+
+    <script>
+      const supportedExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
+
+      function loadImageByName(element, baseName) {
+        const folder = 'Images/';
+        const candidates = supportedExtensions.map((ext) => `${folder}${baseName}.${ext}`);
+        let index = 0;
+
+        function tryNext() {
+          if (index >= candidates.length) return;
+
+          const img = new Image();
+          img.onload = () => {
+            element.style.backgroundImage = `url("${candidates[index]}")`;
+            element.style.backgroundSize = 'cover';
+            element.style.backgroundPosition = 'center';
+            element.textContent = '';
+          };
+          img.onerror = () => {
+            index += 1;
+            tryNext();
+          };
+          img.src = candidates[index];
+        }
+
+        tryNext();
+      }
+
+      document.querySelectorAll('[data-image-name]').forEach((element) => {
+        loadImageByName(element, element.dataset.imageName);
+      });
+    </script>
+  </body>
+</html>

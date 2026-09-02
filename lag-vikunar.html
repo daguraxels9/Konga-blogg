@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lag vikunnar — Elvar Freyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">Elvar Freyr</a>
+        <nav class="site-nav" aria-label="Aðalvalmynd">
+          <a href="index.html">Heim</a>
+          <a href="ljosmynd-vikunar.html">Ljósmynd vikunnar</a>
+          <a href="lag-vikunar.html">Lag vikunnar</a>
+          <a href="kona-vikunar.html">Kona vikunnar</a>
+          <a href="texti-vikunar.html">Texti vikunnar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="entry">
+      <div class="container">
+        <header class="entry-header">
+          <span class="eyebrow">Lag vikunnar</span>
+          <h1>Þetta lag hélst í mér allan daginn</h1>
+          <div class="details">
+            <span>Vika 1</span>
+            <span>Flytjandi: Sól</span>
+            <span>Íslenskur pop</span>
+          </div>
+        </header>
+
+        <div class="feature-illustration" data-image-name="lag-vikunar" style="background: linear-gradient(135deg, #f4d8bc, #c78045);">Lag vikunnar</div>
+
+        <p>Þetta er það lag sem fór með mig á flakk í gegnum vikuna. Það er ekki stórkostlegt að flestu leyti, heldur er það það sem gerir það svo gott: hreint, einfalt og fullkomlega staðsett á milli eftirvæntingar og ró.</p>
+
+        <p>Á meðan ég hlustaði á lagið endurómmaðist sama setningin aftur og aftur: eitthvað um að halda áfram þrátt fyrir allt. Það er ástæðan fyrir því að þetta lag passar vel inn í þessa viku — ekki vegna stórra hreyfinga, heldur vegna lítilla, varanlegra skrefa.</p>
+
+        <blockquote class="quote">“Þú þekkir ekki endann fyrr en þú sérð hvort stjórnin er enn í höndunum.”</blockquote>
+
+        <p>Ef þú vilt hafa meira af laginu skaltu setja það á spilun, loka augunum og leyfa því að fylla rýmið um þig. Það er ekki nauðsynlegt að skilja allt; nóg er að hlusta.</p>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">© 2026 Elvar Freyr</div>
+    </footer>
+
+    <script>
+      const supportedExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
+
+      function loadImageByName(element, baseName) {
+        const folder = 'Images/';
+        const candidates = supportedExtensions.map((ext) => `${folder}${baseName}.${ext}`);
+        let index = 0;
+
+        function tryNext() {
+          if (index >= candidates.length) return;
+
+          const img = new Image();
+          img.onload = () => {
+            element.style.backgroundImage = `url("${candidates[index]}")`;
+            element.style.backgroundSize = 'cover';
+            element.style.backgroundPosition = 'center';
+            element.textContent = '';
+          };
+          img.onerror = () => {
+            index += 1;
+            tryNext();
+          };
+          img.src = candidates[index];
+        }
+
+        tryNext();
+      }
+
+      document.querySelectorAll('[data-image-name]').forEach((element) => {
+        loadImageByName(element, element.dataset.imageName);
+      });
+    </script>
+  </body>
+</html>
