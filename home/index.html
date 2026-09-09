@@ -47,20 +47,22 @@
           const container = document.getElementById('homepage-content');
           if (!container) return;
 
-          const paragraphs = text
-            .split(/\n\s*\n/)
-            .map((paragraph) => paragraph.trim())
+          const lines = text
+            .split(/\n/)
+            .map((line) => line.trim())
             .filter(Boolean)
-            .map((paragraph) => paragraph.replace(/\n/g, ' '));
+            .map((line) => line.replace(/\s+/g, ' '));
 
-          const first = paragraphs[0] || 'Elvar Freyr';
-          const second = paragraphs[1] || 'Viku færslur frá mér';
+          const title = lines[0] || 'Elvar Freyr';
+          const subtitle = lines[1] || '(kóngurinn frá Dalvík)';
+          const body = lines.slice(2).join(' ');
 
           container.innerHTML = `
             <div class="home-intro-inner">
               <span class="eyebrow">Blogg</span>
-              <h1>${first}</h1>
-              <p class="lead">${second}</p>
+              <h1>${title}</h1>
+              <p class="byline">(${subtitle.replace(/[()]/g, '')})</p>
+              <p class="lead">${body || 'Viku færslur frá mér.'}</p>
             </div>
           `;
         })
