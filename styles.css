@@ -93,13 +93,23 @@ img { max-width: 100%; display: block; }
 }
 
 .hero {
-  padding: 32px 0 20px;
+  padding: 54px 0 70px;
+}
+
+.home-intro {
+  max-width: 780px;
+  padding-top: 18px;
+}
+
+.home-intro-inner {
+  display: grid;
+  gap: 12px;
 }
 
 .eyebrow {
   display: inline-block;
-  margin-bottom: 14px;
-  font-size: 0.72rem;
+  margin-bottom: 0;
+  font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -109,19 +119,21 @@ img { max-width: 100%; display: block; }
   font-family: "Newsreader", Georgia, serif;
   font-weight: 500;
   letter-spacing: -0.04em;
-  line-height: 1.08;
+  line-height: 1;
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  font-size: clamp(3.2rem, 7vw, 7rem);
   max-width: 760px;
-  margin-bottom: 18px;
+  margin: 0;
 }
 
 .hero p.lead {
-  max-width: 640px;
-  font-size: 1.08rem;
+  max-width: 580px;
+  margin: 0;
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
   color: var(--muted);
+  line-height: 1.5;
 }
 
 .meta {

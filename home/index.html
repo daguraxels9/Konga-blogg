@@ -28,7 +28,7 @@
     <main class="page-shell">
       <section class="hero">
         <div class="container">
-          <div id="homepage-content"></div>
+          <div id="homepage-content" class="home-intro"></div>
         </div>
       </section>
     </main>
@@ -50,13 +50,19 @@
           const paragraphs = text
             .split(/\n\s*\n/)
             .map((paragraph) => paragraph.trim())
-            .filter(Boolean);
+            .filter(Boolean)
+            .map((paragraph) => paragraph.replace(/\n/g, ' '));
 
-          container.innerHTML = paragraphs
-            .map((paragraph, index) => index === 0
-              ? `<h1>${paragraph.replace(/\n/g, ' ')}</h1>`
-              : `<p class="lead">${paragraph.replace(/\n/g, ' ')}</p>`)
-            .join('');
+          const first = paragraphs[0] || 'Elvar Freyr';
+          const second = paragraphs[1] || 'Viku færslur frá mér';
+
+          container.innerHTML = `
+            <div class="home-intro-inner">
+              <span class="eyebrow">Blogg</span>
+              <h1>${first}</h1>
+              <p class="lead">${second}</p>
+            </div>
+          `;
         })
         .catch(() => {
           const container = document.getElementById('homepage-content');
