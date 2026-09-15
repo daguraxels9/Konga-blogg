@@ -268,6 +268,24 @@ img { max-width: 100%; display: block; }
   color: #2d2d2b;
 }
 
+.week-archive {
+  margin-top: 34px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.week-archive summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.week-archive .single-text-block {
+  margin-top: 14px;
+}
+
 .entry-header {
   border-bottom: 1px solid var(--line);
   padding-bottom: 22px;

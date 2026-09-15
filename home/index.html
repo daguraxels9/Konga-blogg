@@ -29,6 +29,10 @@
       <section class="hero">
         <div class="container">
           <div id="homepage-content" class="home-intro"></div>
+          <details class="week-archive">
+            <summary>Vika 2</summary>
+            <div id="week-2-content" class="single-text-block"></div>
+          </details>
         </div>
       </section>
     </main>
@@ -69,6 +73,20 @@
         .catch(() => {
           const container = document.getElementById('homepage-content');
           if (container) container.innerHTML = '<p class="lead">Textinn er ekki tiltækur.</p>';
+        });
+    </script>
+    <script>
+      fetch('../Textar/vika-2/homepage.txt')
+        .then((response) => response.text())
+        .then((text) => {
+          const container = document.getElementById('week-2-content');
+          if (!container) return;
+          container.innerHTML = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean)
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
         });
     </script>
   </body>

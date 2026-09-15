@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vika 2 — Elvar Freyr</title>
+    <link rel="icon" type="image/jpeg" href="../Images/profile.jpg" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../home/">Elvar Freyr</a>
+        <nav class="site-nav" aria-label="Aðalvalmynd">
+          <a href="../home/">Heim</a>
+          <a href="../ljosmynd-vikunar/">Núverandi vika</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="entry">
+      <div class="container">
+        <header class="entry-header">
+          <span class="eyebrow">Safn</span>
+          <h1>Vika 2</h1>
+          <div class="details">
+            <span>Vistaðar færslur</span>
+            <span>Allir flokkar</span>
+          </div>
+        </header>
+
+        <div id="archive-content"></div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">© 2026 Elvar Freyr</div>
+    </footer>
+
+    <script>
+      const entries = [
+        ['Heimasíða', 'homepage.txt'],
+        ['Ljósmynd vikunnar', 'ljosmynd-vikunar.txt'],
+        ['Lag vikunnar', 'lag-vikunar.txt'],
+        ['Kona vikunnar', 'kona-vikunar.txt'],
+        ['Texti vikunnar', 'texti-vikunar.txt']
+      ];
+
+      const archive = document.getElementById('archive-content');
+
+      Promise.all(entries.map(([title, file]) =>
+        fetch(`../Textar/vika-2/${file}`).then((response) => {
+          if (!response.ok) throw new Error('Text file not found');
+          return response.text();
+        }).then((text) => ({ title, text }))
+      )).then((loadedEntries) => {
+        archive.innerHTML = loadedEntries.map(({ title, text }) => {
+          const paragraphs = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean)
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+
+          return `<section class="archive-entry"><h2>${title}</h2>${paragraphs}</section>`;
+        }).join('');
+      }).catch(() => {
+        archive.innerHTML = '<p>Textarnir eru ekki tiltækir.</p>';
+      });
+    </script>
+  </body>
+</html>
