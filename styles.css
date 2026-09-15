@@ -282,6 +282,16 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
 }
 
+.archive-image {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
 .week-archive .single-text-block {
   margin-top: 14px;
 }
