@@ -37,13 +37,18 @@
           </div>
         </header>
 
-        <img class="page-image" src="../Images/lag-vikunar.JPG" alt="Lag vikunnar" />
+        <img class="page-image" src="../Images/lag-vikunar 3.JPG" alt="Lag vikunnar" />
 
         <div class="single-text-block" id="text-content"></div>
         <details class="week-archive">
           <summary>Vika 2</summary>
           <img class="archive-image" src="../Images/lag-vikunar 2.JPG" alt="Lag vikunnar, Vika 2" />
           <div id="week-2-content" class="single-text-block"></div>
+        </details>
+        <details class="week-archive">
+          <summary>Vika 3</summary>
+          <img class="archive-image" src="../Images/lag-vikunar.JPG" alt="Lag vikunnar, Vika 3" />
+          <div id="week-3-content" class="single-text-block"></div>
         </details>
       </div>
     </main>
@@ -83,6 +88,20 @@
         .then((response) => response.text())
         .then((text) => {
           const container = document.getElementById('week-2-content');
+          if (!container) return;
+          container.innerHTML = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean)
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        });
+    </script>
+    <script>
+      fetch('../Textar/vika-3/lag-vikunar.txt')
+        .then((response) => response.text())
+        .then((text) => {
+          const container = document.getElementById('week-3-content');
           if (!container) return;
           container.innerHTML = text
             .split(/\n\s*\n/)
