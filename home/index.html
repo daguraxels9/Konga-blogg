@@ -45,6 +45,10 @@
             <summary>Vika 5</summary>
             <div id="week-5-content" class="single-text-block"></div>
           </details>
+          <details class="week-archive">
+            <summary>Vika 6</summary>
+            <div id="week-6-content" class="single-text-block"></div>
+          </details>
         </div>
       </section>
     </main>
@@ -134,6 +138,20 @@
         .then((response) => response.text())
         .then((text) => {
           const container = document.getElementById('week-5-content');
+          if (!container) return;
+          container.innerHTML = text
+            .split(/\n\s*\n/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean)
+            .map((paragraph) => `<p>${paragraph.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        });
+    </script>
+    <script>
+      fetch('../Textar/vika-6/homepage.txt')
+        .then((response) => response.text())
+        .then((text) => {
+          const container = document.getElementById('week-6-content');
           if (!container) return;
           container.innerHTML = text
             .split(/\n\s*\n/)
