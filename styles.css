@@ -1,14 +1,14 @@
 :root {
   --ink: #171717;
-  --paper: #f3efe8;
-  --panel: #f8f5ef;
-  --line: #ddd4c8;
-  --muted: #68635d;
+  --paper: #f3e1ea;
+  --panel: #fff8fb;
+  --line: #e7bfd1;
+  --muted: #795f68;
   --song: #b46d38;
   --woman: #9d4b59;
   --text: #3d6172;
   --photo: #5c6b3f;
-  --shadow: rgba(23, 23, 23, 0.08);
+  --shadow: rgba(112, 75, 90, 0.1);
 }
 
 * { box-sizing: border-box; }
@@ -36,7 +36,7 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(243, 239, 232, 0.92);
+  background: rgba(243, 225, 234, 0.94);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
